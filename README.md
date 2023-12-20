@@ -1,4 +1,4 @@
-# AdvancedTaskManager
+# Advanced Task Manager
 
 1. "Add Task" button - We can add tasks by filling the tasks in the prompt dialog box after clicking this button.
 2. "Show Completed" button - It will show only the completed tasks that are already clicked by the user as completed task(s).
