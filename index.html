@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Task Manager</title>
+<style>
+  .completed {
+    text-decoration: line-through;
+  }
+</style>
+</head>
+<body>
+  <h1>Task Manager</h1>
+  <button id="add-task-button">Add Task</button>
+  <button id="filter-completed-button">Show Completed</button>
+  <button id="filter-incomplete-button">Show Incomplete</button>
+  <button id="show-all-button">Show All</button>
+  <ul id="task-list"></ul>
+  
+
+  <script>
+    // Array to store tasks
+const tasks = [];
+
+// Function to add a new task
+function addTask(taskDescription) {
+  tasks.push({
+    description: taskDescription,
+    completed: false,
+  });
+  displayTasks();
+}
+
+// Function to mark a task as complete
+function completeTask(taskIndex) {
+  tasks[taskIndex].completed = true;
+  displayTasks();
+}
+
+// Function to filter tasks based on their status
+function filterTasks(status) {
+  const filteredTasks = tasks.filter((task) => task.completed === status);
+  displayTasks(filteredTasks);
+}
+
+function showAllTasks() {
+      displayTasks(tasks);
+    }
+
+// Function to display tasks
+function displayTasks(tasksToDisplay = tasks) {
+  // Clear any existing task list
+  const taskList = document.getElementById("task-list");
+  taskList.innerHTML = "";
+
+  tasksToDisplay.forEach((task, index) => {
+    const taskItem = document.createElement("li");
+    taskItem.textContent = task.description;
+    taskItem.className = task.completed ? "completed" : "";
+    taskItem.addEventListener("click", () => completeTask(index));
+    taskList.appendChild(taskItem);
+  });
+}
+
+// Add event listeners for buttons or user interactions
+const addTaskButton = document.getElementById("add-task-button");
+addTaskButton.addEventListener("click", () => {
+  const newTaskDescription = prompt("Enter your new task:");
+  addTask(newTaskDescription);
+});
+
+const filterCompletedButton = document.getElementById("filter-completed-button");
+filterCompletedButton.addEventListener("click", () => {
+  filterTasks(true);
+});
+
+const filterIncompleteButton = document.getElementById("filter-incomplete-button");
+filterIncompleteButton.addEventListener("click", () => {
+  filterTasks(false);
+});
+
+const showAllButton = document.getElementById("show-all-button");
+    showAllButton.addEventListener("click", () => {
+      showAllTasks();
+    });
+
+// Initially display all tasks
+displayTasks();
+
+
+
+  </script>
+</body>
+</html>
